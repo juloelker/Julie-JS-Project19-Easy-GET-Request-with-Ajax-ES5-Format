@@ -2,7 +2,7 @@ function easyHTTP() {
   this.http = new XMLHttpRequest();
 }
 
-//HTTP GET request
+//HTTP GET request, ES5 prototyping, no arrows
 easyHTTP.prototype.get = function (url, callback) {
   this.http.open("GET", url, true);
 
@@ -16,27 +16,3 @@ easyHTTP.prototype.get = function (url, callback) {
   };
   this.http.send();
 };
-
-//HTTP POST request
-easyHTTP.prototype.post = function (url, data, callback) {
-  this.http.open("POST", url, true);
-  this.http.setRequestHeader("Content-type", "application/json");
-  let self = this;
-  this.http.onload = function () {
-    callback(null, self.http.responseText);
-  };
-  this.http.send(JSON.stringify(data));
-};
-
-//HTTP PUT
-easyHTTP.prototype.put = function (url, data1, callback) {
-  this.http.open("PUT", url, true);
-  this.http.setRequestHeader("Content-type", "application/json");
-  let self = this;
-  this.http.onload = function () {
-    callback(null, self.http.responseText);
-  };
-  this.http.send(JSON.stringify(data1));
-};
-
-//HTTP DELETE
